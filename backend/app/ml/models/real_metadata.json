@@ -1,133 +1,139 @@
 {
-  "accuracy": 1.0,
-  "precision_macro": 1.0,
-  "recall_macro": 1.0,
-  "f1_macro": 1.0,
+  "dataset_type": "real",
+  "dataset_source": "Public Real Agricultural Empirical Benchmarks (Kaggle SmartAg, SAPFLUXNET)",
+  "split_strategy": "Plot-Level Independent Split (Zero Time-Series Leakage)",
+  "training_samples": 12049,
+  "test_samples": 2951,
+  "accuracy": 0.9878,
+  "precision_macro": 0.9823,
+  "recall_macro": 0.9849,
+  "f1_macro": 0.9836,
+  "f1_weighted": 0.9878,
   "confusion_matrix": [
     [
-      1240,
+      1142,
       0,
       0,
-      0
+      1
     ],
     [
       0,
-      845,
-      0,
-      0
+      945,
+      2,
+      16
     ],
     [
       0,
-      0,
-      430,
-      0
+      1,
+      431,
+      4
     ],
     [
       0,
-      0,
-      0,
-      483
+      10,
+      2,
+      397
     ]
   ],
   "classification_report": {
     "Healthy": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 483.0
+      "precision": 0.9497607655502392,
+      "recall": 0.9706601466992665,
+      "f1-score": 0.9600967351874244,
+      "support": 409.0
     },
     "Water Stress": {
       "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 1240.0
+      "recall": 0.9991251093613298,
+      "f1-score": 0.999562363238512,
+      "support": 1143.0
     },
     "Nutrient Stress": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 430.0
+      "precision": 0.9908045977011494,
+      "recall": 0.9885321100917431,
+      "f1-score": 0.9896670493685419,
+      "support": 436.0
     },
     "Disease Stress": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 845.0
+      "precision": 0.9884937238493724,
+      "recall": 0.9813084112149533,
+      "f1-score": 0.9848879624804586,
+      "support": 963.0
     },
-    "accuracy": 1.0,
+    "accuracy": 0.9878007455099966,
     "macro avg": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 2998.0
+      "precision": 0.9822647717751902,
+      "recall": 0.9849064443418232,
+      "f1-score": 0.9835535275687343,
+      "support": 2951.0
     },
     "weighted avg": {
-      "precision": 1.0,
-      "recall": 1.0,
-      "f1-score": 1.0,
-      "support": 2998.0
+      "precision": 0.9879235560063351,
+      "recall": 0.9878007455099966,
+      "f1-score": 0.9878418459053344,
+      "support": 2951.0
     }
   },
   "feature_importance": [
     {
-      "feature": "sap_flow",
-      "importance": 0.2248
-    },
-    {
       "feature": "ndvi",
-      "importance": 0.1517
+      "importance": 0.185
     },
     {
-      "feature": "soil_moisture_30",
-      "importance": 0.1489
+      "feature": "sap_flow",
+      "importance": 0.1679
     },
     {
       "feature": "ndre",
-      "importance": 0.1445
+      "importance": 0.1552
     },
     {
-      "feature": "soil_moisture_60",
-      "importance": 0.1222
-    },
-    {
-      "feature": "soil_moisture_15",
-      "importance": 0.102
+      "feature": "soil_moisture_30",
+      "importance": 0.1258
     },
     {
       "feature": "electrical_conductivity",
-      "importance": 0.0493
+      "importance": 0.113
+    },
+    {
+      "feature": "soil_moisture_15",
+      "importance": 0.1105
+    },
+    {
+      "feature": "soil_moisture_60",
+      "importance": 0.0833
     },
     {
       "feature": "cwsi",
-      "importance": 0.044
+      "importance": 0.0309
     },
     {
       "feature": "leaf_temperature",
-      "importance": 0.0048
-    },
-    {
-      "feature": "vpd",
-      "importance": 0.0027
-    },
-    {
-      "feature": "soil_temperature",
-      "importance": 0.0024
-    },
-    {
-      "feature": "air_temperature",
-      "importance": 0.0014
-    },
-    {
-      "feature": "relative_humidity",
-      "importance": 0.0009
+      "importance": 0.0069
     },
     {
       "feature": "solar_radiation",
-      "importance": 0.0003
+      "importance": 0.0053
+    },
+    {
+      "feature": "soil_temperature",
+      "importance": 0.0041
+    },
+    {
+      "feature": "air_temperature",
+      "importance": 0.0038
+    },
+    {
+      "feature": "vpd",
+      "importance": 0.0034
+    },
+    {
+      "feature": "relative_humidity",
+      "importance": 0.003
     },
     {
       "feature": "wind_speed",
-      "importance": 0.0001
+      "importance": 0.0019
     }
   ],
   "class_names": [
@@ -153,11 +159,6 @@
     "ndvi",
     "ndre"
   ],
-  "dataset_type": "real",
-  "dataset_source": "Real-World Agricultural Public Benchmarks (Kaggle SmartAg, SAPFLUXNET, INRAE)",
-  "split_strategy": "Plot-Level Independent Split (Zero Time-Series Leakage)",
-  "training_samples": 12002,
-  "test_samples": 2998,
   "model_version": "v1.1.0-real",
-  "trained_at": "2026-08-21T11:11:30.963792"
+  "trained_at": "2026-08-21T12:24:16.650446"
 }

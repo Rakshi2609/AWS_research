@@ -24,12 +24,11 @@
       "classes": ["Healthy", "Water Stress"],
       "preprocessing": [
         "Calibration to % volumetric water content (VWC)",
-        "Temperature-compensated dielectric conversion",
         "VPD derivation using Tetens formula"
       ],
       "limitations": [
         "Sap flow probe not co-located in all subplots",
-        "Multispectral drone passes conducted weekly rather than continuously"
+        "Multispectral drone passes conducted periodically"
       ]
     },
     {
@@ -41,7 +40,7 @@
       "publication": "Global database of sap flow and environmental variables (Earth System Science Data, 13, 2607-2649, 2021)",
       "download_date": "2026-08-21",
       "crop": "Olive, Grapevine, Citrus Agroecosystems",
-      "region": "Global Harmonized Database (Mediterranean & Temperate Field Sites)",
+      "region": "Global Harmonized Database",
       "samples": 85000,
       "features": [
         "sap_flow",
@@ -54,12 +53,12 @@
       ],
       "classes": ["Healthy", "Water Stress"],
       "preprocessing": [
-        "Harmonization of Granier thermal dissipation probes to standardized sap flux density (cm3 cm-2 h-1)",
-        "Zero-flow baseline estimation on nocturnal steady-state windows"
+        "Harmonization of Granier thermal dissipation probes to standardized sap flux density",
+        "Zero-flow nocturnal baseline baseline correction"
       ],
       "limitations": [
-        "Soil electrical conductivity not recorded on forestry/orchard plots",
-        "Canopy infrared thermography only on select sub-experiments"
+        "Soil electrical conductivity not recorded on all plots",
+        "Plant physiological benchmark rather than full 4-class multi-stress label set"
       ]
     },
     {
@@ -84,11 +83,10 @@
       "classes": ["Healthy", "Water Stress", "Nutrient Stress", "Disease Stress"],
       "preprocessing": [
         "Radiometric reflectance calibration",
-        "Atmospheric top-of-canopy correction",
         "Narrow-band RedEdge (705nm) extraction"
       ],
       "limitations": [
-        "Root-depth soil moisture must be coupled via spatial plot coordinates"
+        "In-situ soil moisture must be coupled via spatial plot coordinates"
       ]
     }
   ]
