@@ -23,7 +23,6 @@ wheels/
 .pytest_cache/
 .coverage
 htmlcov/
-.env
 .venv
 venv/
 ENV/
@@ -38,9 +37,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # IDE & OS
-.vscode/
 .idea/
 *.swp
 *.swo
 .DS_Store
 Thumbs.db
+config.bat
