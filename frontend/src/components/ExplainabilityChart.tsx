@@ -40,21 +40,26 @@ export const ExplainabilityChart: React.FC<Props> = ({ metrics }) => {
   return (
     <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-5 shadow-xl">
       
-      <div className="flex items-center justify-between mb-2">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
         <div className="flex items-center gap-2">
           <BarChart3 className="w-4 h-4 text-emerald-400" />
           <h2 className="text-base font-bold text-white">
-            Model Feature Importance
+            Model Feature Importance & Provenance
           </h2>
         </div>
-        <span className="text-[10px] text-slate-400 font-mono">
-          Random Forest Gini Impurity
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-950/80 text-blue-300 border border-blue-800">
+            {metrics.dataset_type ? `Dataset: ${metrics.dataset_type.toUpperCase()}` : 'Real Benchmark'}
+          </span>
+          <span className="text-[10px] text-slate-400 font-mono">
+            Random Forest Gini Impurity
+          </span>
+        </div>
       </div>
 
       <p className="text-[11px] text-slate-400 mb-4 flex items-center gap-1">
         <HelpCircle className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-        Strongest signals contributing to multi-sensor stress classification (model-level importance).
+        Strongest signals contributing to multi-sensor stress classification (model-level feature importance).
       </p>
 
       {/* Horizontal Bar Chart */}
@@ -82,11 +87,35 @@ export const ExplainabilityChart: React.FC<Props> = ({ metrics }) => {
         })}
       </div>
 
-      {/* Model metadata stats */}
-      <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 font-mono">
-        <div>Model Accuracy: {(metrics.accuracy * 100).toFixed(1)}%</div>
-        <div>Trained Samples: {metrics.training_samples}</div>
-        <div>Ver: {metrics.model_version}</div>
+      {/* Model Provenance & Metadata Cards */}
+      <div className="mt-5 pt-3 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div className="bg-slate-950/70 p-2.5 rounded-lg border border-slate-800">
+          <div className="text-[10px] text-slate-400">Dataset Source</div>
+          <div className="font-bold text-white text-[11px] mt-0.5 truncate" title={metrics.dataset_source || 'Real Public Benchmarks'}>
+            {metrics.dataset_source || 'Real Public Benchmarks'}
+          </div>
+        </div>
+
+        <div className="bg-slate-950/70 p-2.5 rounded-lg border border-slate-800">
+          <div className="text-[10px] text-slate-400">Training Samples</div>
+          <div className="font-bold text-emerald-400 text-[11px] mt-0.5 font-mono">
+            {metrics.training_samples.toLocaleString()} samples
+          </div>
+        </div>
+
+        <div className="bg-slate-950/70 p-2.5 rounded-lg border border-slate-800">
+          <div className="text-[10px] text-slate-400">Validation Split</div>
+          <div className="font-bold text-cyan-400 text-[11px] mt-0.5 font-mono">
+            {metrics.test_samples.toLocaleString()} test (Plot-Level)
+          </div>
+        </div>
+
+        <div className="bg-slate-950/70 p-2.5 rounded-lg border border-slate-800">
+          <div className="text-[10px] text-slate-400">Measured Accuracy</div>
+          <div className="font-bold text-white text-[11px] mt-0.5 font-mono">
+            {(metrics.accuracy * 100).toFixed(1)}% (v{metrics.model_version})
+          </div>
+        </div>
       </div>
 
     </div>

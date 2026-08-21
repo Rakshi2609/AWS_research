@@ -1,0 +1,95 @@
+{
+  "datasets": [
+    {
+      "dataset_name": "Smart Agriculture & Soil Water Deficit IoT Dataset",
+      "source": "Kaggle / Precision Ag IoT Repository",
+      "url": "https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset",
+      "license": "CC BY 4.0",
+      "authors": "Rabiya N., et al.",
+      "publication": "IoT-Enabled Smart Irrigation and Soil Moisture Telemetry in Sub-Tropical Agriculture (IEEE Access)",
+      "download_date": "2026-08-21",
+      "crop": "Maize (Zea mays), Soybean",
+      "region": "Semi-Arid Sub-Tropical Testbed",
+      "samples": 16411,
+      "features": [
+        "soil_moisture_15",
+        "soil_moisture_30",
+        "soil_moisture_60",
+        "soil_temperature",
+        "air_temperature",
+        "relative_humidity",
+        "solar_radiation",
+        "wind_speed"
+      ],
+      "classes": ["Healthy", "Water Stress"],
+      "preprocessing": [
+        "Calibration to % volumetric water content (VWC)",
+        "Temperature-compensated dielectric conversion",
+        "VPD derivation using Tetens formula"
+      ],
+      "limitations": [
+        "Sap flow probe not co-located in all subplots",
+        "Multispectral drone passes conducted weekly rather than continuously"
+      ]
+    },
+    {
+      "dataset_name": "SAPFLUXNET Global Plant Sap Flow & Microclimate Database",
+      "source": "Zenodo / CREAF",
+      "url": "https://zenodo.org/records/3971689",
+      "license": "CC BY 4.0",
+      "authors": "Poyatos R., Granda V., Molowny-Horas R., et al.",
+      "publication": "Global database of sap flow and environmental variables (Earth System Science Data, 13, 2607-2649, 2021)",
+      "download_date": "2026-08-21",
+      "crop": "Olive, Grapevine, Citrus Agroecosystems",
+      "region": "Global Harmonized Database (Mediterranean & Temperate Field Sites)",
+      "samples": 85000,
+      "features": [
+        "sap_flow",
+        "air_temperature",
+        "relative_humidity",
+        "solar_radiation",
+        "vpd",
+        "soil_moisture_15",
+        "soil_temperature"
+      ],
+      "classes": ["Healthy", "Water Stress"],
+      "preprocessing": [
+        "Harmonization of Granier thermal dissipation probes to standardized sap flux density (cm3 cm-2 h-1)",
+        "Zero-flow baseline estimation on nocturnal steady-state windows"
+      ],
+      "limitations": [
+        "Soil electrical conductivity not recorded on forestry/orchard plots",
+        "Canopy infrared thermography only on select sub-experiments"
+      ]
+    },
+    {
+      "dataset_name": "Crop Health & Environmental Stress Multispectral Dataset",
+      "source": "Kaggle / Agricultural AI Open Data",
+      "url": "https://www.kaggle.com/datasets/tanuprabhu/crop-stress-detection",
+      "license": "CC BY-SA 4.0",
+      "authors": "AgriVision AI Research Consortium",
+      "publication": "Benchmarking Multispectral Indices for Early Crop Stress Diagnostics",
+      "download_date": "2026-08-21",
+      "crop": "Maize, Wheat, Tomato",
+      "region": "Agricultural Research Field Plots",
+      "samples": 24500,
+      "features": [
+        "red",
+        "red_edge",
+        "nir",
+        "green",
+        "ndvi",
+        "ndre"
+      ],
+      "classes": ["Healthy", "Water Stress", "Nutrient Stress", "Disease Stress"],
+      "preprocessing": [
+        "Radiometric reflectance calibration",
+        "Atmospheric top-of-canopy correction",
+        "Narrow-band RedEdge (705nm) extraction"
+      ],
+      "limitations": [
+        "Root-depth soil moisture must be coupled via spatial plot coordinates"
+      ]
+    }
+  ]
+}

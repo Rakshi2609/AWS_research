@@ -6,12 +6,15 @@ from pydantic import BaseModel
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 APP_DIR = BASE_DIR / "app"
 DATA_DIR = BASE_DIR.parent / "data"
-MODELS_DIR = APP_DIR / "ml"
+MODELS_DIR = APP_DIR / "ml" / "models"
 
 class Settings(BaseModel):
     PROJECT_NAME: str = "Crop Stress AI - Multi-Sensor Fusion"
-    VERSION: str = "1.0.0"
+    VERSION: str = "1.1.0"
     API_V1_STR: str = "/api"
+    
+    # Active Model Selection: "real" | "synthetic" | "combined"
+    MODEL_TYPE: str = os.getenv("MODEL_TYPE", "real")
     
     # Field Grid Configuration (3x5 = 15 zones)
     GRID_ROWS: list[str] = ["A", "B", "C"]
@@ -27,15 +30,24 @@ class Settings(BaseModel):
     IRRIGATION_COOLDOWN_SECONDS: int = 300
     
     # Paths
-    MODEL_PATH: Path = MODELS_DIR / "model.joblib"
-    METADATA_PATH: Path = MODELS_DIR / "metadata.json"
-    TRAINING_DATA_PATH: Path = DATA_DIR / "training" / "crop_stress_dataset.csv"
+    MODELS_DIR: Path = MODELS_DIR
+    MODEL_PATH: Path = APP_DIR / "ml" / "model.joblib"
+    METADATA_PATH: Path = APP_DIR / "ml" / "metadata.json"
+    
+    # Dataset Paths
+    SYNTHETIC_DATA_PATH: Path = DATA_DIR / "synthetic" / "crop_stress_dataset.csv"
+    REAL_DATA_PATH: Path = DATA_DIR / "real" / "real_crop_stress_dataset.csv"
+    COMBINED_DATA_PATH: Path = DATA_DIR / "real" / "combined_crop_stress_dataset.csv"
+    TRAINING_DATA_PATH: Path = DATA_DIR / "real" / "real_crop_stress_dataset.csv"
+    
     SENSOR_LOGS_DIR: Path = DATA_DIR / "sensor_logs"
     MULTISPECTRAL_DIR: Path = DATA_DIR / "multispectral"
 
 settings = Settings()
 
 # Ensure directories exist
+settings.MODELS_DIR.mkdir(parents=True, exist_ok=True)
 settings.SENSOR_LOGS_DIR.mkdir(parents=True, exist_ok=True)
-settings.TRAINING_DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+settings.REAL_DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+settings.SYNTHETIC_DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
 settings.MULTISPECTRAL_DIR.mkdir(parents=True, exist_ok=True)

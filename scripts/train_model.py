@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-Train Random Forest Classifier for Crop Stress Detection and evaluate metrics.
+Train Random Forest Classifier for Crop Stress Detection with dataset selection.
+Supports: --dataset real | synthetic | combined
 """
 import sys
 from pathlib import Path
@@ -10,32 +11,40 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "backend"))
 
 import argparse
 from app.ml.train import train_crop_stress_model
-from app.core.config import settings
 
 
 def main():
     parser = argparse.ArgumentParser(description="Train Crop Stress Multi-Sensor ML Model")
-    parser.add_argument("--samples", type=int, default=12000, help="Dataset samples (if generating new)")
+    parser.add_argument(
+        "--dataset", 
+        type=str, 
+        default="real", 
+        choices=["real", "synthetic", "combined"],
+        help="Dataset to train on: 'real' (default), 'synthetic', or 'combined'"
+    )
+    parser.add_argument("--samples", type=int, default=15000, help="Number of samples to generate/load")
     parser.add_argument("--estimators", type=int, default=120, help="Number of Random Forest trees")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     args = parser.parse_args()
 
-    print("=" * 60)
-    print("🌾 CROP STRESS AI: MULTI-SENSOR FUSION MODEL TRAINING")
-    print("=" * 60)
+    print("=" * 65)
+    print(f"🌾 CROP STRESS AI: MODEL TRAINING [{args.dataset.upper()} DATASET]")
+    print("=" * 65)
 
     metrics = train_crop_stress_model(
-        data_path=settings.TRAINING_DATA_PATH if settings.TRAINING_DATA_PATH.exists() else None,
+        dataset_type=args.dataset,
         n_estimators=args.estimators,
         random_state=args.seed,
         num_samples=args.samples
     )
 
-    print("\n" + "=" * 60)
-    print("📊 EVALUATION RESULTS (Measured on independent test set):")
-    print("=" * 60)
-    print(f"Training samples: {metrics['training_samples']}")
-    print(f"Test samples:     {metrics['test_samples']}")
+    print("\n" + "=" * 65)
+    print(f"📊 MEASURED TEST EVALUATION RESULTS ({metrics['dataset_source']}):")
+    print("=" * 65)
+    print(f"Dataset Type:     {metrics['dataset_type'].upper()}")
+    print(f"Split Strategy:   {metrics['split_strategy']}")
+    print(f"Training Samples: {metrics['training_samples']}")
+    print(f"Test Samples:     {metrics['test_samples']}")
     print(f"\nAccuracy:         {metrics['accuracy'] * 100:.2f}%")
     print(f"Macro F1-Score:   {metrics['f1_macro'] * 100:.2f}%")
     print(f"Macro Precision:  {metrics['precision_macro'] * 100:.2f}%")
@@ -51,7 +60,7 @@ def main():
             print(f"{cls:<18} {cls_stat['precision']:<10.3f} {cls_stat['recall']:<10.3f} {cls_stat['f1-score']:<10.3f} {int(cls_stat['support']):<8}")
     print("-" * 58)
 
-    print("\nTop Contributing Features (Random Forest Importance):")
+    print("\nTop Contributing Features (Random Forest Gini Importance):")
     for idx, item in enumerate(metrics["feature_importance"][:8], 1):
         bar_len = int(item['importance'] * 30)
         bar = "█" * bar_len
@@ -64,7 +73,7 @@ def main():
         row_str = "  ".join([f"{val:>6}" for val in row])
         print(f"{metrics['class_names'][i][:8]:<10} {row_str}")
         
-    print("\n✅ Model training complete and ready for edge inference.")
+    print("\n✅ Training complete and model saved to backend/app/ml/model.joblib")
 
 
 if __name__ == "__main__":

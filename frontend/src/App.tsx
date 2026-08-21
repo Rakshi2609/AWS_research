@@ -34,11 +34,12 @@ export const App: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col selection:bg-emerald-500 selection:text-white">
       
-      {/* Top Sticky Header */}
+      {/* Top Sticky Header with Model Indicator */}
       <DashboardHeader
         simulationActive={gridData?.simulation_active ?? false}
         systemMode={gridData?.system_mode ?? 'AUTO'}
         totalZones={gridData?.total_zones ?? 15}
+        metrics={metrics}
         onRefresh={refresh}
       />
 
@@ -105,7 +106,7 @@ export const App: React.FC = () => {
             }`}
           >
             <BarChart3 className="w-4 h-4" />
-            ML Model Diagnostics
+            ML Model Diagnostics & Provenance
           </button>
         </div>
 
@@ -143,7 +144,7 @@ export const App: React.FC = () => {
               </div>
             )}
 
-            {/* Bottom Row: Explainability */}
+            {/* Bottom Row: Explainability & Model Provenance */}
             <ExplainabilityChart metrics={metrics} />
 
           </div>
@@ -170,7 +171,7 @@ export const App: React.FC = () => {
           </div>
         )}
 
-        {/* Tab 4: ML Diagnostics */}
+        {/* Tab 4: ML Diagnostics & Provenance */}
         {activeTab === 'ml' && (
           <div className="space-y-6">
             <ExplainabilityChart metrics={metrics} />
@@ -192,7 +193,7 @@ export const App: React.FC = () => {
             AI-Enabled IoT Smart Crop Stress Detection System • Local Edge Runtime
           </div>
           <div className="font-mono text-[11px]">
-            Inference: Local Random Forest (15 Features) • Schema-Compliant ESP32 Ready
+            Model: {metrics?.dataset_type?.toUpperCase() || 'REAL'} (v{metrics?.model_version || '1.1.0'}) • Zero-Leakage Plot Split
           </div>
         </div>
       </footer>

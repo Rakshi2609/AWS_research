@@ -91,6 +91,9 @@ export interface MLMetricsResponse {
   training_samples: number;
   test_samples: number;
   model_version: string;
+  dataset_type?: string;
+  dataset_source?: string;
+  split_strategy?: string;
   trained_at: string;
 }
 

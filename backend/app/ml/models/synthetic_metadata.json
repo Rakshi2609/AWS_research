@@ -1,0 +1,163 @@
+{
+  "accuracy": 1.0,
+  "precision_macro": 1.0,
+  "recall_macro": 1.0,
+  "f1_macro": 1.0,
+  "confusion_matrix": [
+    [
+      849,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      609,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      465,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      477
+    ]
+  ],
+  "classification_report": {
+    "Healthy": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 477.0
+    },
+    "Water Stress": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 849.0
+    },
+    "Nutrient Stress": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 465.0
+    },
+    "Disease Stress": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 609.0
+    },
+    "accuracy": 1.0,
+    "macro avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 2400.0
+    },
+    "weighted avg": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 2400.0
+    }
+  },
+  "feature_importance": [
+    {
+      "feature": "sap_flow",
+      "importance": 0.2097
+    },
+    {
+      "feature": "ndre",
+      "importance": 0.1841
+    },
+    {
+      "feature": "ndvi",
+      "importance": 0.1714
+    },
+    {
+      "feature": "soil_moisture_60",
+      "importance": 0.1175
+    },
+    {
+      "feature": "soil_moisture_30",
+      "importance": 0.1156
+    },
+    {
+      "feature": "soil_moisture_15",
+      "importance": 0.0951
+    },
+    {
+      "feature": "electrical_conductivity",
+      "importance": 0.0556
+    },
+    {
+      "feature": "cwsi",
+      "importance": 0.0401
+    },
+    {
+      "feature": "leaf_temperature",
+      "importance": 0.0039
+    },
+    {
+      "feature": "vpd",
+      "importance": 0.0029
+    },
+    {
+      "feature": "soil_temperature",
+      "importance": 0.0014
+    },
+    {
+      "feature": "relative_humidity",
+      "importance": 0.001
+    },
+    {
+      "feature": "air_temperature",
+      "importance": 0.0009
+    },
+    {
+      "feature": "solar_radiation",
+      "importance": 0.0007
+    },
+    {
+      "feature": "wind_speed",
+      "importance": 0.0002
+    }
+  ],
+  "class_names": [
+    "Healthy",
+    "Water Stress",
+    "Nutrient Stress",
+    "Disease Stress"
+  ],
+  "feature_names": [
+    "soil_moisture_15",
+    "soil_moisture_30",
+    "soil_moisture_60",
+    "soil_temperature",
+    "electrical_conductivity",
+    "air_temperature",
+    "relative_humidity",
+    "solar_radiation",
+    "wind_speed",
+    "leaf_temperature",
+    "sap_flow",
+    "vpd",
+    "cwsi",
+    "ndvi",
+    "ndre"
+  ],
+  "dataset_type": "synthetic",
+  "dataset_source": "Synthetic Development Simulator",
+  "split_strategy": "Stratified Random Split",
+  "training_samples": 9600,
+  "test_samples": 2400,
+  "model_version": "v1.1.0-synthetic",
+  "trained_at": "2026-08-21T11:11:14.655911"
+}
