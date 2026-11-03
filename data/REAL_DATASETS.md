@@ -127,4 +127,4 @@ The project establishes three distinct models:
 
 Public datasets validate components of our multi-sensor fusion architecture, but no public dataset contains all 15 target features across all 4 stress classes.
 
-The complete 15-feature fusion system will achieve final empirical validation through our prospective ESP32 + LoRaWAN field trial deployments using [`data/real/field_collection_template.csv`](file:///home/appu/aws/data/real/field_collection_template.csv).
+The complete 15-feature fusion system will achieve final empirical validation through our prospective ESP32 + LoRaWAN field trial deployments using [`data/real/field_collection_template.csv`](real/field_collection_template.csv).

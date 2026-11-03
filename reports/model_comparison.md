@@ -47,4 +47,4 @@
 
 ## 4. Integrity and Provenance Compliance
 
-Every row evaluated in the real benchmark is cataloged in [`data/real/ROW_PROVENANCE.csv`](file:///home/appu/aws/data/real/ROW_PROVENANCE.csv). No row is claimed as raw hardware field measurements before physical ESP32 deployment.
+Every row evaluated in the real benchmark is cataloged in [`data/real/ROW_PROVENANCE.csv`](../data/real/ROW_PROVENANCE.csv). No row is claimed as raw hardware field measurements before physical ESP32 deployment.

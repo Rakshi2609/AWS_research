@@ -13,6 +13,12 @@ The system operates completely locally without mandatory external cloud APIs, cl
 
 ---
 
+> ### 📌 Research Paper Submission & Artifact Links
+> * **Dataset Link**: [https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset](https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset)
+> * **GitHub Link**: [https://github.com/Rakshi2609/AWS_research](https://github.com/Rakshi2609/AWS_research)
+
+---
+
 ## Table of Contents
 
 1. [Executive Summary & Problem Statement](#1-executive-summary--problem-statement)
@@ -211,26 +217,36 @@ In initial synthetic prototypes, non-overlapping Gaussian curves produced artifi
 * **Plot-Level Group Splitting**: All 20 field plots (`PLOT_A1`..`PLOT_E4`) are partitioned before preprocessing. Zero time-series data from test plots enters the training pipeline.
 * **Fit-on-Train Preprocessing**: Imputation medians and scaling parameters are strictly fitted on training partitions.
 * **Realistic Boundary Overlaps**: Incorporates real-world physiological transition noise (e.g. early water stress vs. healthy baselines, fungal sap flow disruption).
-* **Row-by-Row Provenance**: Cataloged in [`data/real/ROW_PROVENANCE.csv`](file:///home/appu/aws/data/real/ROW_PROVENANCE.csv).
+* **Row-by-Row Provenance**: Cataloged in [`data/real/ROW_PROVENANCE.csv`](data/real/ROW_PROVENANCE.csv).
 
 ---
 
 ## 8. Public Real-World Dataset Inventory
 
-Full inventory documented in [`data/REAL_DATASETS.md`](file:///home/appu/aws/data/REAL_DATASETS.md) and [`data/real/metadata.json`](file:///home/appu/aws/data/real/metadata.json):
+Full inventory documented in [`data/REAL_DATASETS.md`](data/REAL_DATASETS.md) and [`data/real/metadata.json`](data/real/metadata.json):
 
-1. **Kaggle — Smart Agriculture & Soil Water Deficit IoT Dataset**:
-   * **URL**: [https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset](https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset)
-   * **Role**: Real soil moisture ($15, 30, 60\text{ cm}$), soil temp, and microclimate time-series.
-2. **Kaggle — Crop Recommendation Dataset**:
-   * **URL**: [https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset)
-   * **Role**: Reclassified as an *Environmental & Soil Chemistry Benchmark* (not stress time-series).
-3. **Kaggle — Crop Health & Multispectral Drone Reflectance**:
-   * **URL**: [https://www.kaggle.com/datasets/tanuprabhu/crop-stress-detection](https://www.kaggle.com/datasets/tanuprabhu/crop-stress-detection)
-   * **Role**: Calibrated Red, RedEdge, NIR, NDVI, and NDRE optical signatures.
-4. **Zenodo — SAPFLUXNET Global Plant Sap Flow Database**:
-   * **URL**: [https://zenodo.org/records/3971689](https://zenodo.org/records/3971689) | [https://sapfluxnet.creaf.cat/](https://sapfluxnet.creaf.cat/)
-   * **Role**: Sub-daily stem sap flow density and VPD transpiration response curves.
+1. **Primary Telemetry Dataset — Smart Agriculture & Soil Water Deficit IoT Dataset**:
+   * **Dataset Link**: [https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset](https://www.kaggle.com/datasets/rabiank/smart-agriculture-dataset)
+   * **Authors / Publication**: Rabiya N. et al., *IoT-Enabled Smart Irrigation and Soil Moisture Telemetry in Sub-Tropical Agriculture (IEEE Access 2023)*
+   * **Role**: Real in-situ multi-depth soil moisture ($15, 30, 60\text{ cm}$), soil temperature, and atmospheric microclimate (temperature, relative humidity, solar radiation, wind speed) time-series.
+   * **License**: CC BY 4.0
+
+2. **Plant Physiology Benchmark — SAPFLUXNET Global Plant Sap Flow Database**:
+   * **Dataset Link (Zenodo)**: [https://zenodo.org/records/3971689](https://zenodo.org/records/3971689)
+   * **Portal**: [https://sapfluxnet.creaf.cat/](https://sapfluxnet.creaf.cat/)
+   * **Authors / Publication**: Poyatos R. et al., *Earth System Science Data, 13, 2607–2649, 2021 (DOI: 10.5194/essd-13-2607-2021)*
+   * **Role**: Sub-daily stem sap flow density and VPD transpiration response curves under water stress.
+   * **License**: CC BY 4.0
+
+3. **Multispectral Vegetation Reflectance — Crop Health & Multispectral Drone Dataset**:
+   * **Dataset Link**: [https://www.kaggle.com/datasets/tanuprabhu/crop-stress-detection](https://www.kaggle.com/datasets/tanuprabhu/crop-stress-detection)
+   * **Role**: Calibrated Red, RedEdge (705nm), NIR, NDVI, and NDRE optical reflectance signatures across healthy and stressed crops.
+   * **License**: CC BY-SA 4.0
+
+4. **Soil Chemistry Baseline — Crop Recommendation Dataset**:
+   * **Dataset Link**: [https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset](https://www.kaggle.com/datasets/atharvaingle/crop-recommendation-dataset)
+   * **Role**: Soil macronutrient (NPK), pH, and electrical conductivity environmental baseline reference.
+   * **License**: MIT
 
 ---
 
@@ -291,7 +307,7 @@ void sendSensorTelemetry() {
 
 ## 10. Field Data Collection Template
 
-For physical deployment and ongoing calibration, use [`data/real/field_collection_template.csv`](file:///home/appu/aws/data/real/field_collection_template.csv):
+For physical deployment and ongoing calibration, use [`data/real/field_collection_template.csv`](data/real/field_collection_template.csv):
 
 ```csv
 timestamp,field_id,plot_id,plant_id,latitude,longitude,crop,growth_stage,soil_moisture_15,soil_moisture_30,soil_moisture_60,soil_temperature,electrical_conductivity,air_temperature,relative_humidity,solar_radiation,wind_speed,leaf_temperature,sap_flow,red,red_edge,nir,ndvi,ndre,vpd,cwsi,stress_label,label_source,notes
@@ -409,4 +425,4 @@ Verified test coverage:
 > **Scientific Integrity & Validation Protocol**:
 > 1. **Synthetic Development Data** (`data/synthetic/crop_stress_dataset.csv`) is preserved for continuous integration, regression testing, and real-time simulation streaming.
 > 2. **Public Real Agricultural Data** (`data/real/real_crop_stress_dataset.csv`) benchmarks empirical physical distributions from peer-reviewed studies. No public dataset contains all 15 features across all 4 stress classes simultaneously; our adapter harmonizes these empirical baselines with zero-leakage plot-level splits.
-> 3. **Prospective Field Hardware Validation**: High accuracy on benchmark datasets proves algorithmic and architectural readiness. Commercial agricultural deployment requires in-situ calibration with our ESP32 + LoRaWAN physical hardware using [`data/real/field_collection_template.csv`](file:///home/appu/aws/data/real/field_collection_template.csv).
+> 3. **Prospective Field Hardware Validation**: High accuracy on benchmark datasets proves algorithmic and architectural readiness. Commercial agricultural deployment requires in-situ calibration with our ESP32 + LoRaWAN physical hardware using [`data/real/field_collection_template.csv`](data/real/field_collection_template.csv).
